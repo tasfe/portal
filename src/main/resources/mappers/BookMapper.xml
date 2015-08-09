@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.portal.entity.Book">
+	<resultMap id="bookMap" type="com.portal.entity.Book">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="type" property="type" jdbcType="TINYINT" />
+		<result column="object_id" property="objectId" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="account_id" property="accountId" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	 	 
+	</resultMap>
+
+	<insert id="insert" parameterType="com.portal.entity.Book"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into book (id,type,object_id,user_id,status,account_id,create_time,update_time) 
+  		values (#{id},#{type},#{objectId},#{userId},#{status},#{accountId},#{createTime},#{updateTime})
+	</insert>
+  
+    <delete id="deleteById" parameterType="long">
+      delete from book where id = #{id}
+    </delete>
+
+	<update id="update" parameterType="com.portal.entity.Book">
+		update book 
+		<set>
+			<if test="type != null">
+				type = #{type},
+			</if>
+      
+            <if test="status != null">
+              status = #{status},
+            </if>  
+			<if test="objectId != null">
+				object_id = #{objectId},
+			</if>
+			 
+			<if test="userId != null">
+				userId = #{userId},
+			</if>
+			<if test="accountId != null">
+				account_id = #{accountId},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime},
+			</if>
+			 <if test="updateTime != null">
+                update_time = #{updateTime},
+              </if>
+		</set>
+		where id = #{id} 
+	</update>
+
+	 
+ 
+	<select id="findById" parameterType="long" resultMap="bookMap">
+		 select * from book where id = #{id}
+
+	</select>
+	
+	 
+</mapper>

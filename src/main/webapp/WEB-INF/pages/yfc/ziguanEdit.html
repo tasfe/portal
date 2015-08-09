@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/select.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="ziguan.html">数据列表</a></li>
+            <li><a href="#">编辑</a></li>
+        </ul>
+    </div>
+    <div class="formbody">
+        <div class="formtitle"><span>资管产品-基本信息</span></div>
+        <form id="form">
+        <ul class="forminfo">
+            <li>
+                <label>产品名称</label>
+                <input name="name" type="text" class="dfinput" /><i>名称不能超过50个字符</i></li>
+            <li>
+                <label>产品简介</label>
+                <textarea name="prointro" cols="" rows="" class="textinput"></textarea> <i>500字以内的说明</i>
+                </li>      
+            <li>
+                <label>发行规模</label>
+                <input name="total" type="text" class="dfinput" /><i>(万元)</i></li>
+            <li>
+                <label>产品周期</label>
+                <input name="period" type="text" class="dfinput" /><i>产品周期，如20天、1个月、1年</i></li>
+            <li>
+                <label>投资门限</label>
+                <input name="threshold" type="text" class="dfinput" /><i>（万元）</i></li>
+            <li>
+                <label>发行机构</label>
+                <input name="issuer" type="text" class="dfinput" /><i></i></li>
+            <li>
+                <label>付息方式</label>
+                <div class="vocation">
+                    <select class="select1" name="paytype">
+                        <option value="0">按月付息</option>
+                        <option value="1">按季付息</option>
+                        <option value="2">半年付息</option>
+                        <option value="3">按年付息</option>
+                        <option value="4">到期付息</option>
+                    </select>
+                </div></li>   
+            <li>
+                <label>投资领域</label>
+                <div class="vocation">
+                    <select class="select1" name="pest">
+                        <option value="0">工商企业</option>
+                        <option value="1">金融市场</option>
+                        <option value="2">基础设施</option>
+                        <option value="3">房地产</option>
+                        <option value="4">工矿企业</option>
+                        <option value="5">其他</option>
+                    </select>
+                </div></li>
+            <li>
+                <label>大小配比</label>
+                <div class="vocation">
+                    <select class="select1" name="ratiosize">
+                        <option value="0">小额畅打</option>
+                        <option value="1">严格配比</option>
+                        <option value="2">全大额</option>
+                    </select>
+                </div></li>           
+            <li>
+                <label>募集进度(%)</label>
+                <input name="collectpregress" type="text" class="dfinput" /><i>小数位为0，则舍去。如78.00,可直接填78。</i>
+            </li>
+            <li>
+                <label>募集进度说明</label>
+                <textarea name="collectdes" cols="" rows="" class="textinput"></textarea> <i>500字以内的说明</i>
+            </li>
+            <li>
+                    <label>收益：</label>
+                    <input type="hidden" name="buynumbers"/>
+                    <input type="hidden" name="incomeratios"/>
+                    <input type="hidden" name="commissions"/>
+                    <table class='sylist' id="sylist" border="0">
+                        <thead>
+                            <tr>
+                                <th width="200">认购金额（万元 以上)</th>
+                                <th width="200">对应收益率</th>
+                                <th width="200">对应佣金</th>
+                                <th width="100"><a href="javascript:;" class='add'>添加</a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" class="buynumber"/><i>（万元）</i></td>
+                                <td><input type="text" class="incomeratio"/><i>%</i></td>
+                                <td><input type="text" class="commission"/><i>%</i></td>
+                                <td><a href="javascript:;" class='del disable'>删除</a></td>
+                            </tr>     
+                        </tbody>
+                    </table>
+                </li>
+             <li>
+                <label>基金经理</label>
+                <input name="managename" type="text" class="dfinput" />
+            </li>
+            <li>
+                <label>详细描述</label>
+                <textarea id="content7" name="desc" style="width:700px;height:250px;visibility:hidden;"></textarea>
+            </li>
+            
+            <li>
+                <label>&nbsp;</label>
+                <input name="" type="button" class="btn" value="确认保存" />
+            </li>
+        </ul>
+        </form>
+    </div>
+    <script type="text/javascript" src="js/public/sea.js"></script>
+    <script>
+    seajs.config({
+        base: './js/',
+        alias: {
+            "jquery": 'public/jquery.js',
+            "select" : 'plugins/select-ui.min.js',
+            "editor" : 'kindeditor/kindeditor-min.js',
+        },
+        preload: ['jquery']
+    });
+    seajs.use("ziguanEdit.js");
+    </script>
+</body>
+
+</html>

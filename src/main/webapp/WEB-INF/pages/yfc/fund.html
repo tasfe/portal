@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/public/html5shiv.js"></script>
+</head>
+
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="fund.html">数据列表</a></li>
+        </ul>
+    </div>
+    <div class="rightinfo">
+        <div class="tools">
+            <ul class="toolbar">
+                <li><a href="fundAdd.html"><span><img src="images/t01.png" /></span>添加</a></li>
+                <li class='popclick' data-target='delpop'><span><img src="images/t03.png" /></span>删除</li>
+            </ul>
+        </div>
+        <table class="tablelist ui-datagrid">
+            <thead>
+                <tr>
+                    <th>
+                        <input name="" type="checkbox" class='ui-chks'/>
+                    </th>
+                    <th>产品名称</th>
+                    <th>产品简介</th>
+                    <th>产品类型</th>
+                    <th>投资策略</th>
+                    <th>认购起点（万元）</th>
+                    <th>发布时间</th>
+                    <th>基金经理</th>
+                    <th>基金公司</th>
+                    <th>产品点评</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id='cntul'></tbody>
+            <script id="cntItemTpl" type="text/html">
+                {{each data as value i}}
+                <tr data-id="{{value.id}}">
+                    <td>
+                        <input name="" type="checkbox" class='ui-chk'/>
+                    </td>
+                    <td><a href="fundEdit.html?id={{value.id}}" class="tablelink">{{value.name}}</a></td>
+                    <td>{{value.prointro}}</td>
+                    <td>{{value.protypetext}}</td>
+                    <td>{{value.strategytext}}</td>
+                    <td>{{value.threshold}}万元</td>
+                    <td>{{value.openday}}</td>
+                    <td>{{value.managename}}</td>
+                    <td>{{value.fundcompany}}</td>
+                    <td>{{value.comment}}</td>
+                    <td>
+                        <a href="fundEdit.html?id={{value.id}}" class="tablelink popclick" > 修改</a>
+                        <a href="#" class="tablelink popclick" data-target='delpop'> 删除</a></td>
+                </tr>
+                {{/each}}
+            </script>
+        </table>
+
+        <div id="pagination" class="pagin"></div>
+        
+ 
+ 
+        <div class='pop delpop' id='delpop'>
+            <div class='pop-lay'></div>
+            <div class='pop-container'>
+                <div class="pop-header"><span>提示信息</span>
+                    <a class='pop-close'></a>
+                </div>
+                <div class="pop-cnt">
+                    <span><img src="images/wicon.png" /></span>
+                    <div class="tipright">
+                        <p>是否删除该信息 ？</p>
+                        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+                    </div>
+                </div>
+                <div class="pop-footer">
+                    <a href='#' class="sure">确定</a>&nbsp;
+                    <input name="" type="button" class="cancel pop-close" value="取消" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/public/sea.js"></script>
+    <script>
+        seajs.config({
+            base:'./js/',
+            alias: {
+                "jquery" : 'public/jquery.js',
+                "popup" : 'plugins/popup.js'
+            },
+            preload: ['jquery']
+        }); 
+        seajs.use("fund.js");
+    </script>
+</body>
+</html>

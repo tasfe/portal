@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/select.css" rel="stylesheet" type="text/css" />
+    <link href="css/plugins/p-bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="simu.html">数据列表</a></li>
+            <li><a href="#">添加</a></li>
+        </ul>
+    </div>
+    <div class="formbody">
+        <div class="formtitle"><span>基本信息</span></div>
+        <form id="form" >
+            <ul class="forminfo">
+                <li>
+                    <label>产品名称</label>
+                    <input name="name" type="text" class="dfinput" /><i>名称不能超过50个字符</i></li>
+                <li>
+                    <label>产品简介</label>
+                    <textarea name="prointro" cols="" rows="" class="textinput"></textarea> <i>500字以内的说明</i>
+                    </li>      
+                <li>
+                    <label>项目成立时间</label>
+                    <input name="foundedTime" type="text" class="dfinput datepicker" /></li>
+                <li>
+                    <label>基金公司</label>
+                    <input name="fundcompany" type="text" class="dfinput" /></li>
+                <li>
+                    <label>投资门限</label>
+                    <input name="threshold" type="text" class="dfinput" /><i>（万元）</i></li>
+               
+                <li>
+                    <label>产品类型</label>
+                    <div class="vocation">
+                        <select class="select1" name="protype">
+                            <option value="0">股票型</option>
+                            <option value="1">管理期货</option>
+                            <option value="2">混合型</option>
+                        </select>
+                    </div></li>   
+                <li>
+                    <label>投资策略</label>
+                    <div class="vocation">
+                        <select class="select1" name="strategy">
+                            <option value="0">宏观策略</option>
+                            <option value="1">市场中性</option>
+                            <option value="2">量化对冲</option>
+                            <option value="3">价值投资</option>
+                            <option value="4">套利</option>
+                            <option value="5">趋势</option>
+                            <option value="6">并购重组</option>
+                            <option value="7">定向增发</option>
+                        </select>
+                    </div></li>        
+                <li>
+                    <label>开放日</label>
+                    <input name="openday" type="text" class="dfinput" />
+                     <i>如：每月1号、8月15日</i>
+                </li>
+                <li>
+                    <label>产品点评</label>
+                    <textarea name="comment" cols="" rows="" class="textinput"></textarea> <i>500字以内的说明</i>
+                </li>
+                <li>
+                    <label>收益：</label>
+                    <input type="hidden" name="buynumbers"/>
+                    <input type="hidden" name="incomeratios"/>
+                    <input type="hidden" name="commissions"/>
+                    <table class='sylist' id="sylist" border="0">
+                        <thead>
+                            <tr>
+                                <th width="200">认购金额（万元 以上)</th>
+                                <th width="200">对应收益率</th>
+                                <th width="200">对应佣金</th>
+                                <th width="100"><a href="javascript:;" class='add'>添加</a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" class="buynumber"/><i>（万元）</i></td>
+                                <td><input type="text" class="incomeratio"/><i>%</i></td>
+                                <td><input type="text" class="commission"/><i>%</i></td>
+                                <td><a href="javascript:;" class='del disable'>删除</a></td>
+                            </tr>     
+                        </tbody>
+                    </table>
+                </li>
+                 <li>
+                    <label>基金经理</label>
+                    <input name="managename" type="text" class="dfinput" />
+                </li>
+                <li>
+                    <label>详细描述</label>
+                    <textarea id="content7" name="desc" style="width:700px;height:250px;visibility:hidden;"></textarea>
+                </li>
+                
+                <li>
+                    <label>&nbsp;</label>
+                    <input name="" type="button" class="btn" value="确认保存" />
+                </li>
+            </ul>
+        </form>
+    </div>
+     <script type="text/javascript" src="js/public/sea.js"></script>
+    <script>
+    seajs.config({
+        base: './js/',
+        alias: {
+            "jquery": 'public/jquery.js',
+            "select" : 'plugins/select-ui.min.js',
+             "editor" : 'kindeditor/kindeditor-min.js',
+            "datepicker":'plugins/bootstrap-datetimepicker.min.js'
+        },
+        preload: ['jquery']
+    });
+    seajs.use("simuAdd.js");
+    </script>
+</body>
+
+</html>

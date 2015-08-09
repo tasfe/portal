@@ -1,0 +1,17 @@
+{
+    "name": "123",
+    "threshold": "100",
+    "desc": "描述",
+    "foundedTime": "2015-07-02",
+    "fundcompany": "基金公司",
+    "protype": 0,
+    "strategy": 0,
+    "buynumbers": "100,200",
+    "incomeratios": "10.00,20.00",
+    "commissions": "20.00,20.11",
+    "openday":"开放日",
+    "comment":"产品点评",
+    "relatedoc":"相关文档地址.doc",
+    "managename":"基金经理",
+    "prointro":"产品简介"
+}

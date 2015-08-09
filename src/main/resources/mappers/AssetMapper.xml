@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.portal.entity.Asset">
+	<resultMap id="assetMap" type="com.portal.entity.Asset">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="create_by" property="createBy" jdbcType="BIGINT" />
+        <result column="photo" property="photo" jdbcType="VARCHAR" />
+		<result column="book_count" property="bookCount" jdbcType="BIGINT" />
+		<result column="fav_count" property="favCount" jdbcType="BIGINT"/>
+		<result column="threshold" property="threshold" jdbcType="DOUBLE" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	 	<result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+        <result column="complete_time" property="completeTime" jdbcType="TIMESTAMP" />
+        <result column="donated" property="donated" jdbcType="VARCHAR" />
+        <result column="description" property="desc" jdbcType="VARCHAR" />
+        <result column="total" property="total" jdbcType="VARCHAR" />
+        <result column="period" property="period" jdbcType="VARCHAR" />
+        <result column="bonus_period" property="bonusPeriod" jdbcType="VARCHAR" />
+        <result column="isshow" property="isshow" jdbcType="TINYINT" />
+        <result column="issuer" property="issuer" jdbcType="VARCHAR" />
+        <result column="paytype" property="paytype" jdbcType="TINYINT" />
+        <result column="pest" property="pest" jdbcType="TINYINT" />
+        <result column="ratiosize" property="ratiosize" jdbcType="TINYINT" />
+        <result column="collectpregress" property="collectpregress" jdbcType="DOUBLE" />
+        <result column="collectdes" property="collectdes" jdbcType="VARCHAR" />
+        <result column="relatedoc" property="relatedoc" jdbcType="VARCHAR" />
+        <result column="buynumbers" property="buynumbers" jdbcType="VARCHAR" />
+        <result column="incomeratios" property="incomeratios" jdbcType="VARCHAR" />
+        <result column="commissions" property="commissions" jdbcType="VARCHAR" />
+        <result column="managename" property="managename" jdbcType="VARCHAR" />
+        <result column="prointro" property="prointro" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.portal.entity.Asset"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into asset (id,name,status,create_by,photo,book_count,fav_count,threshold,create_time,update_time,end_time,complete_time,donated,description,total,period,bonus_period,isshow,issuer,paytype,pest,ratiosize,collectpregress,collectdes,relatedoc,buynumbers,incomeratios,commissions,managename,prointro) 
+  		values (#{id},#{name},#{status},#{createBy},#{photo},#{bookCount},#{favCount},#{threshold},#{createTime},#{updateTime},#{endTime},#{completeTime},#{donated},#{desc},#{total},#{period},#{bonusPeriod},#{isshow},#{issuer},#{paytype},#{pest},#{ratiosize},#{collectpregress},#{collectdes},#{relatedoc},#{buynumbers},#{incomeratios},#{commissions},#{managename},#{prointro})
+	</insert> 
+  
+ 
+  
+    <delete id="deleteById" parameterType="long">
+      delete from asset where id = #{id}
+    </delete>
+
+	<update id="update" parameterType="com.portal.entity.Asset">
+		update asset
+		<set>
+			<if test="name != null">
+				name = #{name},
+			</if>
+            <if test="status != null">
+              status = #{status},
+            </if>
+      
+            <if test="endTime != null">
+              end_time = #{endTime},
+            </if>
+            <if test="completeTime != null">
+              complete_time = #{completeTime},
+            </if>
+            <if test="donated != null">
+              donated = #{donated},
+            </if>
+            <if test="desc != null">
+              description = #{desc},
+            </if>
+            <if test="total != null">
+              total = #{total},
+            </if>
+            <if test="period != null">
+              period = #{period},
+            </if>
+            <if test="bonusPeriod != null">
+              bonus_period = #{bonusPeriod},
+            </if>
+			<if test="photo != null">
+				photo = #{photo},
+			</if>
+			<if test="bookCount != null">
+				book_count = #{bookCount},
+			</if>
+            
+            <if test="favCount != null">
+              fav_count = #{favCount},
+            </if>
+      
+			<if test="threshold != null">
+				threshold = #{threshold},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime},
+			</if>
+			 <if test="updateTime != null">
+                update_time = #{updateTime},
+              </if>
+              
+               
+               <if test="issuer != null">
+                issuer = #{issuer},
+              </if>
+              
+               <if test="isshow != null">
+                isshow = #{isshow},
+              </if>
+               <if test="paytype != null">
+                paytype = #{paytype},
+              </if>
+               <if test="pest != null">
+                pest = #{pest},
+              </if>
+               <if test="ratiosize != null">
+                ratiosize = #{ratiosize},
+              </if>
+               <if test="collectpregress != null">
+                collectpregress = #{collectpregress},
+              </if>
+               <if test="collectdes != null">
+                collectdes = #{collectdes},
+              </if>
+               <if test="relatedoc != null">
+                relatedoc = #{relatedoc},
+              </if>
+               <if test="buynumbers != null">
+                buynumbers = #{buynumbers},
+              </if>
+               <if test="incomeratios != null">
+                incomeratios = #{incomeratios},
+              </if>
+               <if test="commissions != null">
+                commissions = #{commissions},
+              </if>
+               <if test="managename != null">
+                managename = #{managename},
+              </if>
+              
+               <if test="prointro != null">
+                prointro = #{prointro},
+              </if>
+		</set>
+		where id = #{id} 
+	</update>
+
+	 <update id="deleteByIds" parameterType="map">
+    update asset  
+    set isshow = 1 
+     
+    where id in (${id}) 
+  </update>
+ 
+	<select id="findById" parameterType="long" resultMap="assetMap">
+		 select * from asset where id = #{id}
+
+	</select>
+  
+  <select id="findList" parameterType="map" resultMap="assetMap">
+     select * from asset where isshow = 0  limit #{start},#{rows} 
+
+  </select>
+  
+   <select id="findByKeyWord" parameterType="map" resultMap="assetMap">
+     select * from asset where  isshow = 0 and ( prointro like CONCAT(CONCAT('%', #{key}), '%') or name like CONCAT(CONCAT('%', #{key}), '%') ) order by id desc  
+
+  </select>
+  
+  <select id="findListCount" parameterType="map" resultType="long">
+     select count(1) from asset 
+
+  </select>
+	
+	 
+</mapper>

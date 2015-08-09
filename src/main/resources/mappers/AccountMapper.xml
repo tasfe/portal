@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.portal.entity.Account">
+	<resultMap id="accountMap" type="com.portal.entity.Account">
+		<id column="id" property="id" jdbcType="BIGINT" />
+	 	<result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="user_type" property="userType" jdbcType="TINYINT" />
+        <result column="pwd" property="pwd" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.portal.entity.Account"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into account (id,user_name,mobile_phone,user_id,user_type,pwd,create_time,update_time) 
+  		values (#{id},#{userName},#{mobilePhone},#{userId},#{userType},#{pwd},#{createTime},#{updateTime})
+	</insert>
+  
+    <delete id="deleteById" parameterType="long">
+      delete from account where id = #{id}
+    </delete>
+
+	<update id="update" parameterType="com.portal.entity.Account">
+		update account 
+		<set>
+			<if test="userName != null">
+				user_name = #{userName},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId},
+			</if>
+			<if test="mobilePhone != null">
+              mobile_phone = #{mobilePhone},
+            </if>
+        
+			<if test="userType != null">
+				user_type = #{userType},
+			</if>
+			<if test="pwd != null">
+				pwd = #{pwd},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime},
+			</if>
+			 <if test="updateTime != null">
+                update_time = #{updateTime},
+              </if>
+		</set>
+		where id = #{id} 
+	</update>
+
+	 
+ 
+	<select id="findById" parameterType="long" resultMap="accountMap">
+		 select * from account where id = #{id}
+
+	</select>
+  
+  <select id="findByPhone" resultMap="accountMap">
+     select * from account where mobile_phone = #{mobilePhone}
+
+  </select>
+	
+  
+  <select id="findByPhoneAndType" resultMap="accountMap">
+     select * from account where mobile_phone = #{mobilePhone} and user_type = #{userType}
+
+  </select>
+	 
+</mapper>

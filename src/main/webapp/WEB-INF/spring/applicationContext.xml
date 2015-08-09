@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd ">
+		
+
+    <context:property-placeholder location="classpath*:*.properties" ignore-unresolvable="true" />
+	<context:annotation-config/>
+    <!-- <context:component-scan base-package="com.portal"/> -->
+     
+     
+      <bean id="myRealm" class="com.portal.common.MyRealm" />  
+
+<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">  
+    <property name="realm" ref="myRealm" />  
+</bean>  
+<bean id="cacheLoder" lazy-init="true" class="com.portal.common.InitParamSetting" init-method="init" />
+<tx:annotation-driven transaction-manager="transactionManager" />
+
+
+
+<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">  
+    <property name="securityManager" ref="securityManager" />  
+   <!--  <property name="loginUrl" value="login.jsp" />  
+    <property name="successUrl" value="/login/index" />  
+    <property name="unauthorizedUrl" value="index.jsp" />  
+    <property name="filterChainDefinitions">  
+        <value>  
+           /login = authc, roles[admin]
+           /login/index = authc, perms[document:read]
+           /** = authc
+        </value>  
+    </property>  
+     -->
+</bean>  
+
+
+
+    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+
+
+<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+     
+      <bean id="fileUtil" class="com.portal.util.FileUtil">
+        <property name="endpoint" value="${aliyun.oss.endpoint}"/>
+        <property name="accessKeyId" value="${aliyun.oss.accessKeyId}"/>
+        <property name="accessKeySecret" value="${aliyun.oss.accessKeySecret}"/>
+        <property name="bucketName" value="${aliyun.oss.bucketName}"/>
+    </bean>
+     
+</beans>
