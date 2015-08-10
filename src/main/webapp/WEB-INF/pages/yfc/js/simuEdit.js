@@ -45,14 +45,16 @@ define(function(require, exports, modules){
         var numarrs = ["protype","strategy","threshold"];
         // 表单提交url
         var options = {
-            url: 'json/result.json',
+            url: '/donation/update',
             type: 'post',
             dataType: 'JSON',
             contentType: 'application/json',
             data: JSON.stringify($("#form").serializeObject(numarrs)),
             success: function (data) {
                if(data.success){
-                    actiondone.success();
+                   actiondone.success(function(){
+                        history.go(-1);
+                    });
                 }else{
                     actiondone.fail();
                 }
@@ -72,12 +74,14 @@ define(function(require, exports, modules){
     }
     // 编辑 回填数据
     $.ajax({
-        url:'json/simuadd.json',
-        data:{id:getQueryString('id')},
+        url:'/donation/'+getQueryString('id'),
         dataType:'JSON',
         type:'get',
         success:function(data){
-            fill(data);  
+            if(data.success){
+                data.data.id = getQueryString('id');
+                fill(data.data);      
+            }  
         }
     })       
 })

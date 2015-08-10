@@ -9,16 +9,24 @@ define(function(require, exports, modules){
 
 			$('body').append(html);
 		},
-		success: function(){
+		success: function(fn){
 			$('#successpop').show();
             setTimeout(function(){
-                $('#successpop').fadeOut();
+                $('#successpop').fadeOut(function(){
+                	if($.isFunction(fn)){
+	            		fn();
+	            	}
+                });
             },2000);
 		},
-		fail: function(){
+		fail: function(fn){
 			$('#failpop').show();
             setTimeout(function(){
-                $('#failpop').fadeOut();
+                $('#failpop').fadeOut(function(){
+	            	if($.isFunction(fn)){
+	            		fn();
+	            	}
+	            });
             },2000);
 		}
 	}

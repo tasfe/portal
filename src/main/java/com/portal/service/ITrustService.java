@@ -19,4 +19,6 @@ public interface ITrustService {
 
   public Trust findOne(Long id);
 
+  public void update(Trust trust);
+
 }

@@ -52,4 +52,9 @@ public class AssetService implements IAssetService {
     return assetDao.findById(id);
   }
 
+  @Override
+  public void update(Asset asset) {
+    assetDao.update(asset);
+  }
+
 }

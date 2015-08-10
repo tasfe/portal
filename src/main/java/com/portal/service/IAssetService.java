@@ -19,4 +19,6 @@ public interface IAssetService {
 
   public Asset findOne(Long id);
 
+  public void update(Asset asset);
+
 }

@@ -67,7 +67,7 @@ public class AssetController {
     try {
       if (id != null && id.longValue() > 0) {
         result.put("success", true);
-        result.put("asset", assetService.findOne(id));
+        result.put("data", assetService.findOne(id));
       } else {
         result.put("success", false);
         result.put("msg", "产品信息不正确");
@@ -132,7 +132,7 @@ public class AssetController {
   }
 
   /**
-   * 新建私募
+   * 删除私募
    * 
    * @param request
    * @param customer
@@ -175,4 +175,81 @@ public class AssetController {
     return result.toString();
   }
 
+  /**
+   * 资产管理查询
+   * 
+   * @param request
+   * @param customer
+   * @return
+   * @throws JSONException
+   * @throws JsonProcessingException
+   */
+  @RequestMapping(value = "/update", method = RequestMethod.POST)
+  @ResponseBody
+  public String update(HttpServletRequest request, @RequestBody Asset asset) throws JSONException, JsonProcessingException {
+    logger.info("update asset  ");
+    JSONObject result = new JSONObject();
+    try {
+      Subject cUser = SecurityUtils.getSubject();
+      if (cUser.isAuthenticated()) {
+
+        Manager manager = managerService.findByPhone(String.valueOf(cUser.getPrincipal()));
+
+        if (manager != null) {
+          Asset a = assetService.findOne(asset.getId());
+          if (a != null) {
+            a.setBonusPeriod(asset.getBonusPeriod());
+            a.setBookCount(asset.getBookCount());
+            a.setBuynumbers(asset.getBuynumbers());
+            a.setCollectdes(asset.getCollectdes());
+            a.setCollectpregress(asset.getCollectpregress());
+            a.setCommissions(asset.getCommissions());
+            a.setCompleteTime(asset.getCompleteTime());
+            a.setDesc(asset.getDesc());
+            a.setDonated(asset.getDonated());
+            a.setEndTime(asset.getEndTime());
+            a.setFavCount(asset.getFavCount());
+            a.setIncomeratios(asset.getIncomeratios());
+            a.setIsshow(asset.getIsshow());
+            a.setIssuer(asset.getIssuer());
+            a.setManagename(asset.getManagename());
+            a.setName(asset.getName());
+            a.setPaytype(asset.getPaytype());
+            a.setPeriod(asset.getPeriod());
+            a.setPest(asset.getPest());
+            a.setPhoto(asset.getPhoto());
+            a.setProintro(asset.getProintro());
+            a.setRatiosize(asset.getRatiosize());
+            a.setRelatedoc(asset.getRelatedoc());
+            a.setStatus(asset.getStatus());
+            a.setThreshold(asset.getThreshold());
+            a.setTotal(asset.getTotal());
+            a.setUpdateTime(DateUtil.format(new Date(), null));
+
+            assetService.update(a);
+            result.put("success", true);
+            result.put("msg", "操作成功");
+          } else {
+            result.put("success", false);
+            result.put("msg", "数据不正确");
+          }
+
+        } else {
+          result.put("success", false);
+          result.put("msg", "用户信息错误");
+        }
+
+      } else {
+        result.put("success", false);
+        result.put("msg", "请您先登录");
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      result.put("success", false);
+      result.put("msg", "发生错误");
+    }
+
+    return result.toString();
+  }
 }

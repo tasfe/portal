@@ -51,7 +51,9 @@ define(function(require, exports, modules){
             data: JSON.stringify($("#form").serializeObject(numarrs)),
             success: function (data) {
                if(data.success){
-                    actiondone.success();
+                    actiondone.success(function(){
+                        history.go(-1);
+                    });
                 }else{
                     actiondone.fail();
                 }

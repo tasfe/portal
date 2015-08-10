@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.portal.common.DateUtil;
 import com.portal.constant.Constant.ProductStatus;
+import com.portal.entity.Donation;
 import com.portal.entity.Fund;
 import com.portal.entity.Manager;
 import com.portal.service.IAccountService;
@@ -163,12 +164,88 @@ public class FundController {
     try {
       if (id != null && id.longValue() > 0) {
         result.put("success", true);
-        result.put("fund", fundService.findOne(id));
+        result.put("data", fundService.findOne(id));
       } else {
         result.put("success", false);
         result.put("msg", "产品信息不正确");
       }
     } catch (Exception e) {
+      result.put("success", false);
+      result.put("msg", "发生错误");
+    }
+
+    return result.toString();
+  }
+
+  /**
+   * 资产管理查询
+   * 
+   * @param request
+   * @param customer
+   * @return
+   * @throws JSONException
+   * @throws JsonProcessingException
+   */
+  @RequestMapping(value = "/update", method = RequestMethod.POST)
+  @ResponseBody
+  public String update(HttpServletRequest request, @RequestBody Fund fund) throws JSONException, JsonProcessingException {
+    logger.info("update asset  ");
+    JSONObject result = new JSONObject();
+    try {
+      Subject cUser = SecurityUtils.getSubject();
+      if (cUser.isAuthenticated()) {
+
+        Manager manager = managerService.findByPhone(String.valueOf(cUser.getPrincipal()));
+
+        if (manager != null) {
+          Fund f = fundService.findOne(fund.getId());
+          if (f != null) {
+            f.setBonusPeriod(fund.getBonusPeriod());
+            f.setBookCount(fund.getBookCount());
+            f.setBuynumbers(fund.getBuynumbers());
+            f.setComment(fund.getComment());
+            f.setCommissions(fund.getCommissions());
+            f.setDesc(fund.getDesc());
+            f.setDonated(fund.getDonated());
+            f.setEndTime(fund.getEndTime());
+            f.setFoundedTime(fund.getFoundedTime());
+            f.setFundcompany(fund.getFundcompany());
+            f.setIncomeratios(fund.getIncomeratios());
+            f.setIsshow(fund.getIsshow());
+            f.setManagename(fund.getManagename());
+            f.setName(fund.getName());
+            f.setOpenday(fund.getOpenday());
+            f.setPeriod(fund.getPeriod());
+            f.setPhoto(fund.getPhoto());
+            f.setProintro(fund.getProintro());
+            f.setProtype(fund.getProtype());
+            f.setRelatedoc(fund.getRelatedoc());
+            f.setStatus(fund.getStatus());
+            f.setStrategy(fund.getStrategy());
+            f.setThreshold(fund.getThreshold());
+            f.setTotal(fund.getTotal());
+
+            f.setUpdateTime(DateUtil.format(new Date(), null));
+            fundService.update(f);
+            result.put("success", true);
+            result.put("msg", "操作成功");
+          } else {
+            result.put("success", false);
+            result.put("msg", "数据不正确");
+          }
+
+        } else {
+          result.put("success", false);
+          result.put("msg", "用户信息错误");
+        }
+
+      } else {
+        result.put("success", false);
+        result.put("msg", "请您先登录");
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
       result.put("success", false);
       result.put("msg", "发生错误");
     }

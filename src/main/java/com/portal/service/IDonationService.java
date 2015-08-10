@@ -19,4 +19,6 @@ public interface IDonationService {
 
   public Donation findOne(Long id);
 
+  public void update(Donation donation);
+
 }

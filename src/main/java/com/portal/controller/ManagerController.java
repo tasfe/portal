@@ -1,7 +1,9 @@
 package com.portal.controller;
 
 import java.util.Date;
+import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import net.sf.json.JSONException;
@@ -28,6 +30,7 @@ import com.portal.entity.Manager;
 import com.portal.service.IAccountService;
 import com.portal.service.IManagerService;
 import com.portal.service.IUserService;
+import com.portal.util.FileUtil;
 
 @Controller
 @RequestMapping("/manager")
@@ -43,6 +46,9 @@ public class ManagerController {
 
   @Autowired
   IManagerService managerService;
+
+  @Resource
+  FileUtil fileUtil;
 
   /**
    * 基金经理注册
@@ -110,17 +116,19 @@ public class ManagerController {
 
     JSONObject result = new JSONObject();
     try {
-      // JSONObject json = JSONObject.fromObject(coursewareString);
 
       if (file != null && file.getSize() > 0) {
-        // ApiRet<String> ret = nfsUtil.uploadFile(file, NfsDirType.ANNOUNCEMENT);
-        // if (ret.getStatus() == 0) {
-        // result.put("md5", ret.getSingleRet());
-        // result.put("success", true);
-        // } else {
-        // result.put("success", false);
-        // result.put("msg", "发生错误");
-        // }
+
+        String suffix = UUID.randomUUID() + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+
+        fileUtil.putObject(suffix, file.getInputStream());
+
+        result.put("md5", suffix);
+        result.put("success", true);
+      } else {
+        result.put("md5", "");
+        result.put("success", false);
+        result.put("msg", "文件不正确");
       }
     } catch (Exception e) {
       result.put("success", false);

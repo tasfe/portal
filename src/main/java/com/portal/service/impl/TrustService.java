@@ -50,4 +50,10 @@ public class TrustService implements ITrustService {
     return trustDao.findById(id);
   }
 
+  @Override
+  public void update(Trust trust) {
+    // TODO Auto-generated method stub
+    trustDao.update(trust);
+  }
+
 }

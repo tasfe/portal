@@ -19,4 +19,6 @@ public interface IFundService {
 
   public Fund findOne(Long id);
 
+  public void update(Fund fund);
+
 }

@@ -50,4 +50,10 @@ public class FundService implements IFundService {
     return fundDao.findById(id);
   }
 
+  @Override
+  public void update(Fund fund) {
+    // TODO Auto-generated method stub
+    fundDao.update(fund);
+  }
+
 }

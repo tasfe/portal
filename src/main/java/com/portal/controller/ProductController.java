@@ -210,7 +210,7 @@ public class ProductController {
 
     if (!StringUtils.isEmpty(key)) {
 
-      String[] word = key.split("+");
+      String[] word = key.split("\\+");
       String type = word[0];
       String k = word[1];
       params.put("key", k);

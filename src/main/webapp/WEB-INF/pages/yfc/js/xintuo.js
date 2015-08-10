@@ -57,7 +57,8 @@ define(function(require, exports, modules){
             success:function(data){
                 if(data.success){
                     actiondone.success();
-                    render(1);
+                    var currentPage = $('#pagination').find('.blue:last').text() || 1;
+                    render(currentPage);
 
                 }else{
                     actiondone.fail();

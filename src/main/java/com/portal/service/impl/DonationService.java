@@ -52,4 +52,10 @@ public class DonationService implements IDonationService {
     return donationDao.findById(id);
   }
 
+  @Override
+  public void update(Donation donation) {
+    // TODO Auto-generated method stub
+    donationDao.update(donation);
+  }
+
 }

@@ -67,7 +67,7 @@
               donated = #{donated},
             </if>
             <if test="desc != null">
-              desc = #{desc},
+              description = #{desc},
             </if>
             <if test="total != null">
               total = #{total},
