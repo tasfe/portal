@@ -1,1 +1,1 @@
-portal
+springmvc mybatis template
